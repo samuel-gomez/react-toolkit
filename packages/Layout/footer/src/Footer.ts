@@ -1,5 +1,5 @@
-import FooterCore, { FooterCoreProps } from './FooterCore';
 import { mapProps, mapper } from 'recompose';
+import FooterCore, { FooterCoreProps } from './FooterCore';
 
 export interface FooterProps extends FooterCoreProps {
   copyright?: React.ReactNode;

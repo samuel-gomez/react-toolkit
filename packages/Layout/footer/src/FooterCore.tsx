@@ -5,6 +5,7 @@ import {
   withClassModifier,
   WithClassModifierOptions,
 } from '@axa-fr/react-toolkit-core';
+
 const DEFAULT_CLASSNAME = 'af-footer';
 
 interface FooterCoreComponentProps {
@@ -12,6 +13,7 @@ interface FooterCoreComponentProps {
   href?: string;
   title?: string;
   icon?: string;
+  isIconHidden?: boolean;
   alt?: string;
   className?: string;
 }
@@ -22,6 +24,7 @@ const defaultProps: Partial<FooterCoreComponentProps> = {
   title: 'Site Axa',
   icon: 'assets/logo-axa.svg',
   alt: 'Logo Axa',
+  isIconHidden: false,
 };
 
 const FooterCoreRaw: React.SFC<FooterCoreComponentProps> = ({
@@ -29,21 +32,25 @@ const FooterCoreRaw: React.SFC<FooterCoreComponentProps> = ({
   href,
   title,
   icon,
+  isIconHidden,
   alt,
   children,
 }) => (
   <footer className={className}>
-    <div className='container-fluid container'>
-      <a className='af-logo' href={href} title={title} target='blank'>
-        <img className='af-logo__brand' src={icon} alt={alt} />
-      </a>
-      <div className='af-footer-content'>{children}</div>
+    <div className="container-fluid container">
+      {!isIconHidden && (
+        <a className="af-logo" href={href} title={title} target="blank">
+          <img className="af-logo__brand" src={icon} alt={alt} />
+        </a>
+      )}
+      <div className="af-footer-content">{children}</div>
     </div>
   </footer>
 );
 FooterCoreRaw.defaultProps = defaultProps;
 
-export type FooterCoreProps = FooterCoreComponentProps & WithClassModifierOptions;
+export type FooterCoreProps = FooterCoreComponentProps &
+  WithClassModifierOptions;
 
 const enhance = compose<FooterCoreComponentProps, FooterCoreProps>(
   withClassDefault(DEFAULT_CLASSNAME),
